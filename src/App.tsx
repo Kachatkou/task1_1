@@ -1,14 +1,8 @@
 import "./App.css";
-import PricingCard from "./PricingCard";
+import { PricingSection } from "./PricingCard";
 
 function App() {
-  return (
-    <PricingCard
-      plan="Free"
-      price="$0"
-      features={["1000 API calls", "1000 API calls", "1000 API calls"]}
-    />
-  );
+  return <PricingSection />;
 }
 
 export default App;

@@ -18,14 +18,11 @@ const PricingCard: React.FC<PricingCardProps> = ({
     aria-label={`${plan} plan`}
     className={`
       flex flex-col items-center w-full sm:w-80
-      bg-white
       ${
         isFeatured
-          ? "sm:scale-105 bg-slate-700 text-white z-10"
-          : "text-slate-700"
+          ? "sm:scale-110 bg-slate-700 text-white z-20 shadow-2xl -mt-8"
+          : "bg-white text-slate-700 z-10 border border-slate-200 shadow-lg"
       }
-      rounded-none sm:rounded-lg
-      shadow
       transition
       duration-200
       outline-none
@@ -45,79 +42,107 @@ const PricingCard: React.FC<PricingCardProps> = ({
       >
         {plan}
       </span>
-      <span className="text-5xl font-extrabold mb-4 tracking-tight">
+      <span className="text-5xl font-extrabold mb-12 tracking-tight">
         {price}
       </span>
-      <ul className="w-full mb-6">
-        {features.map((feature, idx) => (
-          <li
-            key={idx}
-            className={`py-2 border-b last:border-b-0 text-center text-base font-medium ${
-              isFeatured ? "border-slate-500" : "border-slate-200"
-            }`}
-          >
-            {feature}
-          </li>
-        ))}
-      </ul>
+      <div
+        className={`w-full h-px ${
+          isFeatured ? "bg-slate-500" : "bg-slate-200"
+        }`}
+      ></div>
+      <div className="w-full py-2">
+        <ul className="w-full">
+          {features.map((feature, idx) => (
+            <li
+              key={idx}
+              className={`py-4 border-b last:border-b-0 text-center text-base font-medium ${
+                isFeatured ? "border-slate-500" : "border-slate-200"
+              } list-none`}
+            >
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div
+        className={`w-full h-px ${
+          isFeatured ? "bg-slate-500" : "bg-slate-200"
+        }`}
+      ></div>
       <button
         className={`
-          w-full mt-2 py-2 font-bold rounded
-          ${
-            isFeatured
-              ? "bg-white text-slate-700 hover:bg-slate-100"
-              : "bg-slate-700 text-white hover:bg-slate-800"
-          }
-          focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400
+          w-full mt-8 font-bold
+          bg-transparent border-none shadow-none rounded-none
+          p-0
+          ${isFeatured ? "text-white" : "text-slate-700"}
+          hover:underline focus:underline
+          cursor-pointer
           transition
           uppercase
           tracking-wide
+          outline-none focus-visible:ring-2 focus-visible:ring-blue-400
         `}
+        style={{ fontFamily: "inherit", fontSize: "inherit" }}
       >
-        Subscribe
+        SUBSCRIBE
       </button>
     </div>
   </div>
 );
 
 export const PricingSection: React.FC = () => (
-  <div className="bg-slate-800 min-h-screen flex flex-col items-center py-12 px-2">
+  <div className="bg-[#232323] min-h-screen flex flex-col items-center py-12 px-2">
     <h2 className="text-white text-3xl font-bold mb-10">Pricing</h2>
     <div
       className="
-      grid grid-cols-1 sm:grid-cols-3 gap-8
-      max-w-5xl w-full
-      items-stretch
-    "
+        relative
+        flex flex-col sm:flex-row
+        gap-0 sm:gap-0
+        max-w-5xl w-full
+        items-center
+        justify-center
+        sm:space-x-0
+        pt-12
+      "
+      style={{ minHeight: "500px" }}
     >
-      <PricingCard
-        plan="Standard"
-        price="$100"
-        features={[
-          "50,000 Requests",
-          "4 contributors",
-          "Up to 3 GB storage space",
-        ]}
-      />
-      <PricingCard
-        plan="Pro"
-        price="$200"
-        features={[
-          "100,000 Requests",
-          "7 contributors",
-          "Up to 6 GB storage space",
-        ]}
-        isFeatured
-      />
-      <PricingCard
-        plan="Expert"
-        price="$500"
-        features={[
-          "200,000 Requests",
-          "11 contributors",
-          "Up to 10 GB storage space",
-        ]}
-      />
+      {/* Standard Card (left) */}
+      <div className="absolute left-0 sm:left-[calc(50%-480px)] z-0">
+        <PricingCard
+          plan="Standard"
+          price="$100"
+          features={[
+            "50,000 Requests",
+            "4 contributors",
+            "Up to 3 GB storage space",
+          ]}
+        />
+      </div>
+      {/* Pro Card (center, featured) */}
+      <div className="z-20">
+        <PricingCard
+          plan="Pro"
+          price="$200"
+          features={[
+            "100,000 Requests",
+            "7 contributors",
+            "Up to 6 GB storage space",
+          ]}
+          isFeatured
+        />
+      </div>
+      {/* Expert Card (right) */}
+      <div className="absolute right-0 sm:right-[calc(50%-480px)] z-0">
+        <PricingCard
+          plan="Expert"
+          price="$500"
+          features={[
+            "200,000 Requests",
+            "11 contributors",
+            "Up to 10 GB storage space",
+          ]}
+        />
+      </div>
     </div>
   </div>
 );
