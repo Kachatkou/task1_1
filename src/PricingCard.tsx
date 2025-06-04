@@ -20,7 +20,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
       flex flex-col items-center w-full sm:w-80
       ${
         isFeatured
-          ? "sm:scale-110 bg-slate-700 text-white z-20 shadow-2xl -mt-8"
+          ? "sm:scale-110 bg-slate-700 text-white z-20 shadow-2xl sm:-mt-8"
           : "bg-white text-slate-700 z-10 border border-slate-200 shadow-lg"
       }
       transition
@@ -97,17 +97,15 @@ export const PricingSection: React.FC = () => (
       className="
         relative
         flex flex-col sm:flex-row
-        gap-0 sm:gap-0
+        gap-8 sm:gap-0
         max-w-5xl w-full
         items-center
         justify-center
-        sm:space-x-0
         pt-12
       "
-      style={{ minHeight: "500px" }}
     >
       {/* Standard Card (left) */}
-      <div className="absolute left-0 sm:left-[calc(50%-480px)] z-0">
+      <div className="w-full sm:absolute sm:left-[calc(50%-480px)] z-0 flex justify-center sm:justify-end">
         <PricingCard
           plan="Standard"
           price="$100"
@@ -119,7 +117,7 @@ export const PricingSection: React.FC = () => (
         />
       </div>
       {/* Pro Card (center, featured) */}
-      <div className="z-20">
+      <div className="w-full z-20 flex justify-center">
         <PricingCard
           plan="Pro"
           price="$200"
@@ -132,7 +130,7 @@ export const PricingSection: React.FC = () => (
         />
       </div>
       {/* Expert Card (right) */}
-      <div className="absolute right-0 sm:right-[calc(50%-480px)] z-0">
+      <div className="w-full sm:absolute sm:right-[calc(50%-480px)] z-0 flex justify-center sm:justify-start">
         <PricingCard
           plan="Expert"
           price="$500"
